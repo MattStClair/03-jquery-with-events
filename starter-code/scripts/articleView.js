@@ -42,16 +42,15 @@ articleView.handleAuthorFilter = function() {
       //       Use an "attribute selector" to find those articles, and fade them in for the reader.
       $('#articles article').hide();
       var $chosenValue = $(this).val();
-      console.log($chosenValue);
-      $('[data-author="' + $chosenValue + '"]').show();
-
+      //console.log($chosenValue);
+      $('article[data-author="' + $chosenValue + '"]').show();
 
     } else {
 
       // DONE: If the select box was changed to an option that is blank, we should
       //       show all the articles, except the one article we are using as a template.
-      $('#articles article').show();
-      $('.template').hide();
+      $('#articles article:not(.template)').show();
+      //$('.template').hide();
 
     }
     $('#category-filter').val('');
@@ -63,7 +62,17 @@ articleView.handleCategoryFilter = function() {
   //       When an option with a value is selected, hide all the articles, then reveal the matches.
   //       When the blank (default) option is selected, show all the articles, except for the template.
   //       Be sure to reset the #author-filter while you are at it!
-
+  $('#category-filter').on('change', function() {
+    if ($(this).val()) {
+      $('#articles article').hide();
+      var $chosenValue = $(this).val();
+      //console.log($chosenValue);
+      $('article[data-category="' + $chosenValue + '"]').show();
+    } else {
+      $('#articles article:not(.template)').show();
+    }
+    $('#author-filter').val('');
+  });
 };
 
 articleView.handleMainNav = function() {
@@ -73,6 +82,16 @@ articleView.handleMainNav = function() {
   //       So: You need to dynamically build a selector string with the correct ID, based on the
   //       data available to you on the .tab element that was clicked.
 
+  $('nav .tab').on('click', function() {
+    $('.tab-content').hide();
+
+    var $chosenValue = $(this).data('content'); // data-content="articles", data-content="articles"
+
+    $('#' + $chosenValue).fadeIn();
+
+    //$('#articles').show();
+    //$('#about').show();
+  });
 
   $('.main-nav .tab:first').click(); // Let's now trigger a click on the first .tab element, to set up the page.
 };
@@ -80,7 +99,7 @@ articleView.handleMainNav = function() {
 articleView.setTeasers = function() {
   $('.article-body *:nth-of-type(n+2)').hide(); // Hide elements beyond the first 2 in any article body.
 
-  // TODO: Add an event handler to reveal all the hidden elements,
+  // TODO: Add an event handler to reveal all the hidden elements,e
   //       when the .read-on link is clicked. You can go ahead and hide the
   //       "Read On" link once it has been clicked. Be sure to prevent the default link-click action!
   //       Ideally, we'd attach this as just 1 event handler on the #articles section, and let it
@@ -95,5 +114,7 @@ $(document).ready(function() {
 
   articleView.populateFilters();
   articleView.handleAuthorFilter();
+  articleView.handleCategoryFilter();
+  articleView.handleMainNav();
 
 })
