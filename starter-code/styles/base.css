@@ -1,4 +1,4 @@
-/* TODO: Add some coordinated colors to make the blog more distinguished:
+/* DONE: Add some coordinated colors to make the blog more distinguished:
          Use an accent color for all links, and remove their underline. */
 
 body {
@@ -22,6 +22,13 @@ address {
   display: inline-block;
 }
 
+h1, h2 {
+    color: white;
+}
+
+header a, header a:link, header a:active {
+    color: white;
+}
 /*LINK STYLES
 =======================================*/
 
