@@ -102,12 +102,16 @@ articleView.setTeasers = function() {
   $('#articles').on('click', 'a.read-on', function(e){
     e.preventDefault();
 
-    $(this).text("Show less..");
+    //$(this).siblings('.article-body').children('p').show();
+    //$(this).text("Show less..");
 
-    if ($(this).text() === 'Read on')
-    {
+    if ($(this).text() === 'Read on →') {
+      $(this).text("Show less...");
       $(this).siblings('.article-body').children('p').show();
-      $('.article-body *:nth-of-type(n+2)').hide();
+    } else {
+      $(this).text('Read on →');
+      $(this).siblings('.article-body').children('*:nth-of-type(n+2)').hide();
+      //$(this).siblings('.article-body *:nth-of-type(n+2)').hide();
     }
 
     // $(this).hide();
