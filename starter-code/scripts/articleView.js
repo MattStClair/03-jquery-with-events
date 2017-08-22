@@ -50,7 +50,6 @@ articleView.handleAuthorFilter = function() {
       // DONE: If the select box was changed to an option that is blank, we should
       //       show all the articles, except the one article we are using as a template.
       $('#articles article:not(.template)').fadeIn();
-      //$('.template').hide();
 
     }
     $('#category-filter').val('');
@@ -66,7 +65,6 @@ articleView.handleCategoryFilter = function() {
     if ($(this).val()) {
       $('#articles article').hide();
       var $chosenValue = $(this).val();
-      //console.log($chosenValue);
       $('article[data-category="' + $chosenValue + '"]').fadeIn();
     } else {
       $('#articles article:not(.template)').fadeIn();
@@ -84,13 +82,8 @@ articleView.handleMainNav = function() {
 
   $('nav .tab').on('click', function() {
     $('.tab-content').hide();
-
     var $chosenValue = $(this).data('content'); // data-content="articles", data-content="articles"
-
     $('#' + $chosenValue).fadeIn();
-
-    //$('#articles').show();
-    //$('#about').show();
   });
 
   $('.main-nav .tab:first').click(); // Let's now trigger a click on the first .tab element, to set up the page.
@@ -102,20 +95,13 @@ articleView.setTeasers = function() {
   $('#articles').on('click', 'a.read-on', function(e){
     e.preventDefault();
 
-    //$(this).siblings('.article-body').children('p').show();
-    //$(this).text("Show less..");
-
     if ($(this).text() === 'Read on →') {
       $(this).text("Show less...");
       $(this).siblings('.article-body').children('p').show();
     } else {
       $(this).text('Read on →');
       $(this).siblings('.article-body').children('*:nth-of-type(n+2)').hide();
-      //$(this).siblings('.article-body *:nth-of-type(n+2)').hide();
     }
-
-    // $(this).hide();
-
   });
 
 
