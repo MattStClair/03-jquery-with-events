@@ -96,7 +96,7 @@ articleView.setTeasers = function() {
     e.preventDefault();
 
     if ($(this).text() === 'Read on →') {
-      $(this).text("Show less...");
+      $(this).text('Show less...');
       $(this).siblings('.article-body').children('p').show();
     } else {
       $(this).text('Read on →');
